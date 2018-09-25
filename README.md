@@ -2,7 +2,7 @@
 
 [![NPM](https://img.shields.io/david/MiguelMedeiros/kraken-dashboard.svg?style=flat-square)](https://david-dm.org/MiguelMedeiros/kraken-dashboard#info=dependencies)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/MiguelMedeiros/kraken-dashboard)
-[![Known Vulnerabilities](https://snyk.io/test/github/MiguelMedeiros/kraken-dashboard/badge.svg)](https://snyk.io/test/github/MiguelMedeiros/kraken-dashboard)
+[![Known Vulnerabilities](https://snyk.io/test/github/MiguelMedeiros/kraken-dashboard/badge.svg?style=flat-square)](https://snyk.io/test/github/MiguelMedeiros/kraken-dashboard)
 
 ## Features
 
@@ -72,6 +72,26 @@ $ npm run react
 ```
 
 Navigate to [http://localhost:3000](http://localhost:3000).
+
+## REST API Endpoints
+
+- Public Market Data
+  - Get asset info
+  - Get tradable asset pairs
+  - Get ticker information
+  - Get order book
+  - Get recent trades
+- Private User Data
+  - Get account balance
+  - Get trade balance
+  - Get open orders
+  - Get closed orders
+  - Get trades history
+  - Get open positions
+  - Get ledgers info
+- Private User Trading
+  - Cancel open order (comming soon)
+  - Add standard order (comming soon)
 
 ## Creator
 
