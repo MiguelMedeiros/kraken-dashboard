@@ -1,0 +1,75 @@
+// Here you can add other styles
+.navbar-brand {
+  text-align: center;
+}
+.navbar-brand {
+  img {
+    display: block;
+    margin: auto;
+    width: 100%;
+    margin-left: 40px;
+  }
+}
+
+#pair-trading-view {
+  padding-bottom: 23px;
+}
+
+#pair-info {
+  margin-bottom: 10px;
+  td {
+    border: 0;
+    border-bottom: 1px solid #ccc;
+  }
+  strong {
+    text-align: right;
+    width: 100%;
+    display: block;
+  }
+}
+
+.sk-wave {
+  margin: 0 !important;
+  padding: 0 !important;
+  height: 20px !important;
+  text-align: right !important;
+  width: 100% !important;
+}
+
+#featured-cards {
+  .sk-wave {
+    text-align: left !important;
+    margin: 1px !important;
+    height: 30px !important;
+  }
+  .sk-rect {
+    text-align: left !important;
+  }
+  .fa-handshake {
+    width: 118px;
+  }
+}
+
+.noActiveClass .nav-link.active {
+  background: none !important;
+}
+.noActiveClass .nav-link .nav-icon {
+  color: #73818f !important;
+}
+.noActiveClass .nav-link {
+  &:hover {
+    background: #20a8d8 !important;
+    .nav-icon {
+      color: #fff !important;
+    }
+  }
+}
+
+.fa-dollar:before {
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+
+.cancel-order {
+  padding: 0.05rem 0.45rem;
+}
