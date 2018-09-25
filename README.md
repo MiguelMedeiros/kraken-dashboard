@@ -6,6 +6,24 @@
 
 ## Features
 
+- Balance:
+  - Balance
+  - Trade Balance
+- Ledger:
+  - Ledger History
+- Orders:
+  - Open Orders
+  - Closed Orders
+  - Trade History
+- Cryptocurrencies:
+  - Informations: last trade, volume, last bid, last ask, high, low, etc
+  - Charts
+  - Last Trades
+  - Ask Orderbook
+  - Bid Orderbook
+
+## Packages
+
 - Kraken REST API
 - NodeJS
 - Express
@@ -50,7 +68,6 @@ module.exports = {
 ### Basic usage
 
 ```bash
-# server at http://localhost:3000
 $ npm run react
 ```
 
