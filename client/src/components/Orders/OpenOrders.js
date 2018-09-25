@@ -1,9 +1,16 @@
 import React, { Component } from "react";
-import { Card, CardBody, CardHeader, Col, Table, Button } from "reactstrap";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Col,
+  Table
+  //Button
+} from "reactstrap";
 import isEmpty from "../../helpers/is-empty";
 import unixTime from "../../helpers/time";
 import SpinnerSquare from "../Spinners/SpinnerSquare";
-import { cancelOrder } from "../../actions/privateUserTradingActions";
+// import { cancelOrder } from "../../actions/privateUserTradingActions";
 
 import "spinkit/css/spinkit.css";
 

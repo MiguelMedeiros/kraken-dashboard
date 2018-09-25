@@ -1,6 +1,9 @@
 import axios from "axios";
 import axiosCancel from "axios-cancel";
-import { CANCEL_ORDER, GET_ERRORS } from "./types";
+import {
+  //CANCEL_ORDER,
+  GET_ERRORS
+} from "./types";
 
 export const cancelOrder = orderID => dispatch => {
   axios({
