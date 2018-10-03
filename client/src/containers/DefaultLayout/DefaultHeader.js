@@ -19,7 +19,7 @@ class DefaultHeader extends Component {
     return (
       <React.Fragment>
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
-        <AppNavbarBrand full={{ src: logo, alt: "CoreUI Logo" }} />
+        <AppNavbarBrand full={{ src: logo, alt: "Kraken Dashboard" }} />
         <AppSidebarToggler className="d-md-down-none" display="lg" />
       </React.Fragment>
     );

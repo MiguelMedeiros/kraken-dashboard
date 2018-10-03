@@ -19,12 +19,15 @@ import {
   CLEAR_OPEN_POSITIONS
 } from "./types";
 
+axiosCancel(axios, {
+  debug: false // default
+});
+
 export const getBalance = () => dispatch => {
   axios({
     method: "get",
     requestId: "balance",
-    url: "/api/privateUserData/Balance",
-    cancelPreviousRequest: true
+    url: "/api/privateUserData/Balance"
   })
     .then(res =>
       dispatch({
@@ -32,23 +35,19 @@ export const getBalance = () => dispatch => {
         payload: res.data
       })
     )
-    .catch(err =>
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err
-      })
-    );
-  axiosCancel(axios, {
-    debug: false // default
-  });
+      });
+    });
 };
 
 export const getTradeBalance = () => dispatch => {
   axios({
     method: "get",
     requestId: "tradeBalance",
-    url: "/api/privateUserData/TradeBalance",
-    cancelPreviousRequest: true
+    url: "/api/privateUserData/TradeBalance"
   })
     .then(res =>
       dispatch({
@@ -56,23 +55,19 @@ export const getTradeBalance = () => dispatch => {
         payload: res.data
       })
     )
-    .catch(err =>
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err
-      })
-    );
-  axiosCancel(axios, {
-    debug: false // default
-  });
+      });
+    });
 };
 
 export const getLedgers = () => dispatch => {
   axios({
     method: "get",
     requestId: "ledgers",
-    url: "/api/privateUserData/Ledgers",
-    cancelPreviousRequest: true
+    url: "/api/privateUserData/Ledgers"
   })
     .then(res =>
       dispatch({
@@ -80,23 +75,19 @@ export const getLedgers = () => dispatch => {
         payload: res.data
       })
     )
-    .catch(err =>
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err
-      })
-    );
-  axiosCancel(axios, {
-    debug: false // default
-  });
+      });
+    });
 };
 
 export const getOpenOrders = () => dispatch => {
   axios({
     method: "get",
     requestId: "openOrders",
-    url: "/api/privateUserData/OpenOrders",
-    cancelPreviousRequest: true
+    url: "/api/privateUserData/OpenOrders"
   })
     .then(res =>
       dispatch({
@@ -104,23 +95,19 @@ export const getOpenOrders = () => dispatch => {
         payload: res.data
       })
     )
-    .catch(err =>
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err
-      })
-    );
-  axiosCancel(axios, {
-    debug: false // default
-  });
+      });
+    });
 };
 
 export const getClosedOrders = () => dispatch => {
   axios({
     method: "get",
     requestId: "closedOrders",
-    url: "/api/privateUserData/ClosedOrders",
-    cancelPreviousRequest: true
+    url: "/api/privateUserData/ClosedOrders"
   })
     .then(res =>
       dispatch({
@@ -128,23 +115,19 @@ export const getClosedOrders = () => dispatch => {
         payload: res.data
       })
     )
-    .catch(err =>
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err
-      })
-    );
-  axiosCancel(axios, {
-    debug: false // default
-  });
+      });
+    });
 };
 
 export const getTradesHistory = () => dispatch => {
   axios({
     method: "get",
     requestId: "tradesHistory",
-    url: "/api/privateUserData/TradesHistory",
-    cancelPreviousRequest: true
+    url: "/api/privateUserData/TradesHistory"
   })
     .then(res =>
       dispatch({
@@ -152,23 +135,19 @@ export const getTradesHistory = () => dispatch => {
         payload: res.data
       })
     )
-    .catch(err =>
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err
-      })
-    );
-  axiosCancel(axios, {
-    debug: false // default
-  });
+      });
+    });
 };
 
 export const getOpenPositions = () => dispatch => {
   axios({
     method: "get",
     requestId: "openPositions",
-    url: "/api/privateUserData/OpenPositions",
-    cancelPreviousRequest: true
+    url: "/api/privateUserData/OpenPositions"
   })
     .then(res =>
       dispatch({
@@ -176,15 +155,12 @@ export const getOpenPositions = () => dispatch => {
         payload: res.data
       })
     )
-    .catch(err =>
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err
-      })
-    );
-  axiosCancel(axios, {
-    debug: false // default
-  });
+      });
+    });
 };
 
 export const clearOpenOrders = () => {

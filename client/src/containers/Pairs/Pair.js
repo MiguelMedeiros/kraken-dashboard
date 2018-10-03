@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, CardBody, CardHeader, Col, Row, Table } from "reactstrap";
+import { Col, Row } from "reactstrap";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import {
@@ -14,11 +14,11 @@ import {
 } from "../../actions/publicMarketDataActions";
 
 import isEmpty from "../../helpers/is-empty";
-import Spinner from "../../components/Spinners/Spinner";
 import Orderbook from "../../components/Orderbook/Orderbook";
 import Trades from "../../components/Trades/Trades";
-import Widget02 from "../../components/Widgets/Widget02";
 import TradingViewWidget, { Themes } from "react-tradingview-widget";
+import PairInfo from "../../components/Pair/PairInfo";
+import PairMoreInfo from "../../components/Pair/PairMoreInfo";
 
 const clock = 3500;
 
@@ -35,10 +35,7 @@ class Pair extends Component {
     this.props.clearPair();
     this.setState({ currentPair: this.props.match.params.id });
     this.interval = setInterval(() => {
-      this.props.getPair(this.props.match.params.id);
-      this.props.getTicker(this.props.match.params.id);
-      this.props.getOrderbook(this.props.match.params.id);
-      this.props.getTrades(this.props.match.params.id);
+      this.getData(this.props.match.params.id);
     }, clock);
   }
 
@@ -65,18 +62,18 @@ class Pair extends Component {
 
       // Current Pair
       this.setState({ currentPair: nextProps.match.params.id });
-
-      this.props.getPair(nextProps.match.params.id);
-      this.props.getTicker(nextProps.match.params.id);
-      this.props.getOrderbook(nextProps.match.params.id);
-      this.props.getTrades(nextProps.match.params.id);
+      this.getData(nextProps.match.params.id);
       this.interval = setInterval(() => {
-        this.props.getPair(nextProps.match.params.id);
-        this.props.getTicker(nextProps.match.params.id);
-        this.props.getOrderbook(nextProps.match.params.id);
-        this.props.getTrades(nextProps.match.params.id);
+        this.getData(nextProps.match.params.id);
       }, clock);
     }
+  }
+
+  async getData(id) {
+    await this.props.getPair(id);
+    await this.props.getTicker(id);
+    await this.props.getOrderbook(id);
+    await this.props.getTrades(id);
   }
   render() {
     let currentPair = this.state.currentPair;
@@ -88,16 +85,6 @@ class Pair extends Component {
       trades
     } = this.state.publicMarketData;
 
-    let ask = <Spinner />;
-    let bid = <Spinner />;
-    let lastTrade = <Spinner />;
-    let volume = <Spinner />;
-    let volumeAverage = <Spinner />;
-    let numberTrades = <Spinner />;
-    let low = <Spinner />;
-    let high = <Spinner />;
-    let spread = <Spinner />;
-    let spreadCurrent = <Spinner />;
     let orderbookAsks = "";
     let orderbookBids = "";
     let tradingViewCode = "";
@@ -120,30 +107,9 @@ class Pair extends Component {
       !isEmpty(pair[currentPair].pair_decimals)
     ) {
       pairDecimals = pair[currentPair].pair_decimals;
-    }
-
-    if (
-      !isEmpty(ticker) &&
-      !isEmpty(currentPair) &&
-      !isEmpty(ticker[currentPair]) &&
-      this.props.match.params.id === currentPair
-    ) {
-      ask = parseFloat(ticker[currentPair].a[0]).toFixed(pairDecimals);
-      bid = parseFloat(ticker[currentPair].b[0]).toFixed(pairDecimals);
-      lastTrade = parseFloat(ticker[currentPair].c[0]).toFixed(pairDecimals);
-      volume = parseFloat(ticker[currentPair].v[1]).toFixed(pairDecimals);
-      volumeAverage = parseFloat(ticker[currentPair].p[1]).toFixed(
-        pairDecimals
-      );
-      numberTrades = ticker[currentPair].t[1];
-      low = parseFloat(ticker[currentPair].l[1]).toFixed(pairDecimals);
-      high = parseFloat(ticker[currentPair].h[1]).toFixed(pairDecimals);
-      spread = parseFloat(
-        ticker[currentPair].h[1] - ticker[currentPair].l[1]
-      ).toFixed(pairDecimals);
-      spreadCurrent = parseFloat(
-        ticker[currentPair].a[0] - ticker[currentPair].b[0]
-      ).toFixed(pairDecimals);
+      if (pairDecimals > 4) {
+        pairDecimals = 4;
+      }
     }
 
     if (
@@ -162,108 +128,23 @@ class Pair extends Component {
       !isEmpty(trades[currentPair]) &&
       this.props.match.params.id === currentPair
     ) {
-      tradesBook = trades[currentPair];
-      tradesBook = [].concat(tradesBook).reverse();
+      tradesBook = [].concat(trades[currentPair]).reverse();
     }
+
     return (
       <div className="animated fadeIn">
         <h1>{this.props.match.params.id}</h1>
-        <Row id="featured-cards">
-          <Col xs="12" sm="12" lg="6" xl="3">
-            <Widget02
-              header={lastTrade}
-              mainText="Last Trade"
-              icon="fas fa-handshake"
-              color="primary"
-              variant="2"
-            />
-          </Col>
-          <Col xs="12" sm="12" lg="6" xl="3">
-            <Widget02
-              header={volume}
-              mainText="Volume"
-              icon="fas fa-fill"
-              color="warning"
-              variant="2"
-            />
-          </Col>
-          <Col xs="12" sm="12" lg="6" xl="3">
-            <Widget02
-              header={bid}
-              mainText="Last Bid"
-              icon="fa fa-arrow-up"
-              color="success"
-              variant="2"
-            />
-          </Col>
-          <Col xs="12" sm="12" lg="6" xl="3">
-            <Widget02
-              header={ask}
-              mainText="Last Ask"
-              icon="fa fa-arrow-down"
-              color="danger"
-              variant="2"
-            />
-          </Col>
-        </Row>
+        <PairInfo
+          ticker={ticker}
+          currentPair={currentPair}
+          pairDecimals={pairDecimals}
+        />
         <Row>
-          <Col lg={6}>
-            <Card>
-              <CardHeader>
-                <strong>
-                  <i className="fa fa-info-circle" /> More Informations
-                </strong>
-              </CardHeader>
-              <CardBody>
-                <Table responsive size="sm" id="pair-info">
-                  <tbody>
-                    <tr>
-                      <td>High (24h):</td>
-                      <td>
-                        <strong>{high}</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Low (24h):</td>
-                      <td>
-                        <strong>{low}</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Spread (24h):</td>
-                      <td>
-                        <strong>{spread}</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Current Spread:</td>
-                      <td>
-                        <strong>{spreadCurrent}</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Weighted Average Price (24h):</td>
-                      <td>
-                        <strong>{volumeAverage}</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Volume (24h):</td>
-                      <td>
-                        <strong>{volume}</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Number of Trades (24h):</td>
-                      <td>
-                        <strong>{numberTrades}</strong>
-                      </td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </CardBody>
-            </Card>
-          </Col>
+          <PairMoreInfo
+            ticker={ticker}
+            currentPair={currentPair}
+            pairDecimals={pairDecimals}
+          />
           <Col lg={6} id="pair-trading-view">
             {tradingViewCode && (
               <TradingViewWidget

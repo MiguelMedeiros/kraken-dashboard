@@ -19,10 +19,10 @@ class AccountLedger extends Component {
       errors: {},
       message: {}
     };
+    this.props.clearAccount();
   }
 
   componentDidMount() {
-    // this.props.clearAccount();
     this.props.getLedgers();
 
     this.intervalLedger = setInterval(() => {

@@ -14,12 +14,15 @@ import {
   CLEAR_ORDERBOOK
 } from "./types";
 
+axiosCancel(axios, {
+  debug: false // default
+});
+
 export const getTicker = pair => dispatch => {
   axios({
     method: "get",
     requestId: "ticker",
-    url: "/api/publicMarketData/Ticker/" + pair,
-    cancelPreviousRequest: true
+    url: "/api/publicMarketData/Ticker/" + pair
   })
     .then(res =>
       dispatch({
@@ -27,23 +30,19 @@ export const getTicker = pair => dispatch => {
         payload: res.data
       })
     )
-    .catch(err =>
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err
-      })
-    );
-  axiosCancel(axios, {
-    debug: false // default
-  });
+      });
+    });
 };
 
 export const getTrades = pair => dispatch => {
   axios({
     method: "get",
     requestId: "trades",
-    url: "/api/publicMarketData/Trades/" + pair,
-    cancelPreviousRequest: true
+    url: "/api/publicMarketData/Trades/" + pair
   })
     .then(res =>
       dispatch({
@@ -51,23 +50,19 @@ export const getTrades = pair => dispatch => {
         payload: res.data
       })
     )
-    .catch(err =>
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err
-      })
-    );
-  axiosCancel(axios, {
-    debug: false // default
-  });
+      });
+    });
 };
 
 export const getPairs = () => dispatch => {
   axios({
     method: "get",
     requestId: "pairs",
-    url: "/api/publicMarketData/AssetPairs",
-    cancelPreviousRequest: true
+    url: "/api/publicMarketData/AssetPairs"
   })
     .then(res =>
       dispatch({
@@ -75,23 +70,19 @@ export const getPairs = () => dispatch => {
         payload: res.data
       })
     )
-    .catch(err =>
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
-        payload: err.response.data
-      })
-    );
-  axiosCancel(axios, {
-    debug: false // default
-  });
+        payload: err
+      });
+    });
 };
 
 export const getPair = pairName => dispatch => {
   axios({
     method: "get",
     requestId: "pair",
-    url: "/api/publicMarketData/AssetPairs/" + pairName,
-    cancelPreviousRequest: true
+    url: "/api/publicMarketData/AssetPairs/" + pairName
   })
     .then(res =>
       dispatch({
@@ -99,23 +90,19 @@ export const getPair = pairName => dispatch => {
         payload: res.data
       })
     )
-    .catch(err =>
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err
-      })
-    );
-  axiosCancel(axios, {
-    debug: false // default
-  });
+      });
+    });
 };
 
 export const getOrderbook = pair => dispatch => {
   axios({
     method: "get",
     requestId: "orderbook",
-    url: "/api/publicMarketData/Depth/" + pair,
-    cancelPreviousRequest: true
+    url: "/api/publicMarketData/Depth/" + pair
   })
     .then(res =>
       dispatch({
@@ -123,15 +110,12 @@ export const getOrderbook = pair => dispatch => {
         payload: res.data
       })
     )
-    .catch(err =>
+    .catch(err => {
       dispatch({
         type: GET_ERRORS,
         payload: err
-      })
-    );
-  axiosCancel(axios, {
-    debug: false // default
-  });
+      });
+    });
 };
 
 export const clearOrderbook = () => {

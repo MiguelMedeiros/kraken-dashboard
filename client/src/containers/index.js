@@ -1,5 +1,5 @@
 import DefaultLayout from "./DefaultLayout";
-import { AccountBalance } from "./Account/Balance";
+import { AccountBalance, AccountLedger, AccountOrders } from "./Account";
 import { Pair } from "./Pairs";
 
-export { DefaultLayout, AccountBalance, Pair };
+export { DefaultLayout, AccountBalance, Pair, AccountLedger, AccountOrders };

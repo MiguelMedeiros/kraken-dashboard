@@ -28,6 +28,7 @@ class AccountOrders extends Component {
       errors: {},
       message: {}
     };
+    this.props.clearAccount();
   }
 
   componentDidMount() {

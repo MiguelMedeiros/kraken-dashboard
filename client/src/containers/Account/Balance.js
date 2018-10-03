@@ -21,10 +21,10 @@ class AccountBalance extends Component {
       errors: {},
       message: {}
     };
+    this.props.clearAccount();
   }
 
   componentDidMount() {
-    // this.props.clearAccount();
     this.props.getBalance();
 
     setTimeout(() => {
